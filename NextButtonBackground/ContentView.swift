@@ -55,11 +55,11 @@ struct ButtonBackground: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(Color(.gray.withAlphaComponent(configuration.isPressed ? 0.8 : 0)))
+            .background(Color(.gray.withAlphaComponent(configuration.isPressed ? 0.6 : 0)))
             .foregroundStyle(.blue)
             .clipShape(Circle())
-            .scaleEffect(configuration.isPressed ? 0.8 : 1)
-            .animation(.easeInOut(duration: 0.22), value: configuration.isPressed)
+            .scaleEffect(configuration.isPressed ? 0.86 : 1)
+            .animation(.easeOut(duration: 0.22), value: configuration.isPressed)
     }
 }
 
