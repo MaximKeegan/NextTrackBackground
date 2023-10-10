@@ -52,14 +52,25 @@ struct ContentView: View {
 }
 
 struct ButtonBackground: ButtonStyle {
+    @State private var isPressed: Bool = false
+    
     func makeBody(configuration: Configuration) -> some View {
+        
         configuration.label
             .padding()
-            .background(Color(.gray.withAlphaComponent(configuration.isPressed ? 0.6 : 0)))
+            .background(Color(.gray.withAlphaComponent(isPressed ? 0.6 : 0)))
             .foregroundStyle(.blue)
             .clipShape(Circle())
-            .scaleEffect(configuration.isPressed ? 0.86 : 1)
-            .animation(.easeOut(duration: 0.22), value: configuration.isPressed)
+            .scaleEffect(isPressed ? 0.86 : 1)
+            .onChange(of: configuration.isPressed) { oldValue, newValue in
+                if (newValue) {
+                    withAnimation(.easeInOut(duration: 0.22)) {
+                        isPressed = true
+                    } completion: {
+                        isPressed = false
+                    }
+                }
+            }
     }
 }
 
